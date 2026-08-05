@@ -1,6 +1,6 @@
 # Audit Report — iris-flow-driver
 
-**Score: 83/100**
+**Score: 86/100**
 
 ## 20-Category Scoring
 
@@ -8,10 +8,10 @@
 |---|-----------|-------|
 | 1.1 Modularity | 5/5 |
 | 1.2 API Design | 4/5 |
-| 1.3 Error Handling | 3/5 |
-| 1.4 Configuration | 4/5 |
+| 1.3 Error Handling | 4/5 |
+| 1.4 Configuration | 5/5 |
 | 1.5 Extensibility | 4/5 |
-| 2.1 Readability | 4/5 |
+| 2.1 Readability | 5/5 |
 | 2.2 Documentation | 5/5 |
 | 2.3 Testing | 3/5 |
 | 2.4 Type Safety | 4/5 |
@@ -27,7 +27,7 @@
 | 5.3 Versioning | 4/5 |
 | 5.4 Community | 4/5 |
 
-**Total: 83/100**
+**Total: 86/100**
 
 ## Verdict: ⚠️ NEEDS WORK
 
