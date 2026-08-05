@@ -78,3 +78,35 @@ struct iris_flow_isp_config {
 #define IRIS_FLOW_IOCTL_SET_HDR       _IOW(IRIS_FLOW_MAGIC, 7, __u32)
 
 #endif /* IRIS_FLOW_UAPI_H */
+
+/* USB camera support */
+#define IRIS_FLOW_SOURCE_MIPI  0
+#define IRIS_FLOW_SOURCE_USB   1
+#define IRIS_FLOW_SOURCE_FILE  2
+
+/* Camera tuning parameters */
+struct iris_flow_tuning {
+    __s32 calibration_r;
+    __s32 calibration_g;
+    __s32 calibration_b;
+    __u32 color_temp;
+    __u32 exposure_target;
+    __u32 focus_position;
+    __u32 low_light_threshold;
+    __u32 reserved[4];
+};
+
+/* Pipeline diagnostics */
+struct iris_flow_diagnostics {
+    __u32 frame_count;
+    __u32 dropped_frames;
+    __u32 latency_spikes;
+    __u32 sync_errors;
+    __u32 buffer_overruns;
+    __u32 init_failures;
+    __u64 reserved[4];
+};
+
+#define IRIS_FLOW_IOCTL_SET_SOURCE  _IOW(IRIS_FLOW_MAGIC, 8, __u32)
+#define IRIS_FLOW_IOCTL_SET_TUNING  _IOW(IRIS_FLOW_MAGIC, 9, struct iris_flow_tuning)
+#define IRIS_FLOW_IOCTL_GET_DIAG    _IOR(IRIS_FLOW_MAGIC, 10, struct iris_flow_diagnostics)

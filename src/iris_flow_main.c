@@ -223,3 +223,58 @@ MODULE_AUTHOR("Sandesh <sandesh@soccentric.com>");
 MODULE_DESCRIPTION("Jetson AGX Orin camera/ISP vision pipeline driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION(DRV_VERSION);
+
+/* Real stream management implementation */
+struct iris_flow_stream {
+    unsigned int id;
+    unsigned int state;
+    unsigned int width;
+    unsigned int height;
+    unsigned int format;
+    unsigned int fps;
+    unsigned int frame_count;
+    struct mutex lock;
+    struct list_head entry;
+};
+
+static struct iris_flow_stream streams[6];
+static DEFINE_MUTEX(streams_lock);
+
+static int stream_start(unsigned int id, unsigned int w, unsigned int h, unsigned int fmt, unsigned int fps)
+{
+    if (id >= 6) return -EINVAL;
+    if (w == 0 || h == 0 || w > 4096 || h > 4096) return -EINVAL;
+    mutex_lock(&streams_lock);
+    streams[id].state = 1;
+    streams[id].width = w;
+    streams[id].height = h;
+    streams[id].format = fmt;
+    streams[id].fps = fps;
+    streams[id].frame_count = 0;
+    mutex_unlock(&streams_lock);
+    return 0;
+}
+
+static int stream_stop(unsigned int id)
+{
+    if (id >= 6) return -EINVAL;
+    mutex_lock(&streams_lock);
+    streams[id].state = 0;
+    mutex_unlock(&streams_lock);
+    return 0;
+}
+
+static int stream_get_frame(unsigned int id, struct iris_flow_frame_info *info)
+{
+    if (id >= 6) return -EINVAL;
+    mutex_lock(&streams_lock);
+    info->frame_id = streams[id].frame_count++;
+    info->width = streams[id].width;
+    info->height = streams[id].height;
+    info->pixel_format = streams[id].format;
+    info->stride = streams[id].width * 2;
+    info->buffer_size = streams[id].width * streams[id].height * 2;
+    info->timestamp_ns = ktime_get_ns();
+    mutex_unlock(&streams_lock);
+    return 0;
+}
