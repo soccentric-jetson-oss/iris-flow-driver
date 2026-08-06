@@ -2,8 +2,8 @@
 /*
  * iris_flow_main.c - Core driver for Jetson AGX Orin camera/ISP pipeline
  *
- * Copyright (C) 2026 SoC Centric
- * Author: Sandesh <sandesh@soccentric.com>
+ * Copyright (c) 2026 SoC Centric LLC
+ * Author: Sandesh Ghimire
  *
  * Exposes the camera sensor and ISP hardware via /dev/iris-flow*.
  * Supports multi-stream capture (up to 6 streams), ISP tuning,
@@ -219,7 +219,7 @@ static void __exit iris_flow_exit(void)
 module_init(iris_flow_init);
 module_exit(iris_flow_exit);
 
-MODULE_AUTHOR("Sandesh <sandesh@soccentric.com>");
+MODULE_AUTHOR("Sandesh Ghimire <sandesh@soccentric.com>");
 MODULE_DESCRIPTION("Jetson AGX Orin camera/ISP vision pipeline driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION(DRV_VERSION);

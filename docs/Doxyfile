@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Doxyfile for iris-flow-driver
+# Copyright (c) 2026 SoC Centric LLC
+# Author: Sandesh Ghimire
+#
+# Full DOT integration: call graphs, caller graphs, collaboration,
+# include graphs, directory graphs, and UML-style class diagrams.
+
+PROJECT_NAME           = "Iris Flow Driver"
+PROJECT_NUMBER         = 0.1.0
+PROJECT_BRIEF          = "Jetson AGX Orin camera/ISP (MIPI CSI-2) kernel driver"
+OUTPUT_DIRECTORY       = docs/html
+CREATE_SUBDIRS         = YES
+INPUT                  = include/ src/ lib/include/ lib/src/
+RECURSIVE              = YES
+FILE_PATTERNS          = *.c *.h
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+HTML_DYNAMIC_SECTIONS  = YES
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 4
+DOT_GRAPH_MAX_DEPTH    = 3
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+DIRECTORY_GRAPH        = YES
+CLASS_DIAGRAMS         = YES
+CLASS_GRAPH            = YES
+DOT_TRANSPARENT        = YES
+MAX_DOT_GRAPH_DEPTH    = 3
+WARN_NO_PARAMDOC       = YES
+WARN_AS_ERROR          = YES
