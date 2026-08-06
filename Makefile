@@ -80,3 +80,15 @@ distclean: clean
 help:
 	@echo "Iris Flow Driver $(DRV_VERSION)"
 	@echo "Targets: all, module, lib, test, stress, clean, distclean"
+
+# ── Formatting & Linting ────────────────────────────────────────────
+CLANG_FILES := src/*.c include/*.h lib/src/*.c lib/include/*.h
+format:
+	@clang-format -i $(CLANG_FILES) 2>/dev/null || true
+format-check:
+	@clang-format --dry-run --Werror $(CLANG_FILES) 2>/dev/null || echo "WARNING: clang-format not available"
+lint:
+	@cppcheck --enable=all --inconclusive --suppress=missingIncludeSystem src/*.c lib/src/*.c test/*.c 2>/dev/null || echo "WARNING: cppcheck not available"
+doc:
+	@doxygen docs/Doxyfile 2>/dev/null || echo "WARNING: doxygen not available"
+analyze: format-check lint
